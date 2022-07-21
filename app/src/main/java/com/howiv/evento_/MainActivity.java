@@ -12,9 +12,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
-
 
     //private DatabaseReference databaseReferencia = FirebaseDatabase.getInstance().getReference();
     private Button btnDot;
@@ -51,11 +51,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public final void abrirArtistas() {
-       // this.startActivity(new Intent((Context)this, TelaArtistasActivity.class));
+        Intent historicoIntent = new Intent(this, TelaArtistasActivity.class);
+        startActivity(historicoIntent);
     }
 
     public final void abrirBandas() {
-        //this.startActivity(new Intent((Context)this, TelaBandasActivity.class));
+        Intent historicoIntent = new Intent(this, TelaBandasActivity.class);
+        startActivity(historicoIntent);
     }
 
 }

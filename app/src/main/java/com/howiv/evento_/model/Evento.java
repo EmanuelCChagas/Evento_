@@ -1,4 +1,4 @@
-package model;
+package com.howiv.evento_.model;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package model;
+package com.howiv.evento_.model;
 
 public class Banda {
     public String nome;
