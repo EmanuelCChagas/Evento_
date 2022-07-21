@@ -51,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public final void abrirArtistas() {
-        Intent historicoIntent = new Intent(this, TelaArtistasActivity.class);
-        startActivity(historicoIntent);
+        Intent telaArtistaIntent = new Intent(this, TelaArtistasActivity.class);
+        startActivity(telaArtistaIntent);
     }
 
     public final void abrirBandas() {
-        Intent historicoIntent = new Intent(this, TelaBandasActivity.class);
-        startActivity(historicoIntent);
+        Intent telaBandasIntent = new Intent(this, TelaBandasActivity.class);
+        startActivity(telaBandasIntent);
     }
 
 }
