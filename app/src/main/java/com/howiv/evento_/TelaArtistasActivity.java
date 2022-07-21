@@ -15,7 +15,7 @@ import com.howiv.evento_.model.Artista;
 
 public class TelaArtistasActivity extends AppCompatActivity {
 
-    private Button btnNovoArtistas = findViewById(R.id.btn_novo_artistas);
+    private Button btnNovoArtistas;
     List<Artista> artistas;
     RecyclerView recyclerView;
     // contaAdapter;
@@ -26,6 +26,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_artistas);
 
+        btnNovoArtistas = findViewById(R.id.btn_novo_artistas);
         btnNovoArtistas.setOnClickListener(view ->{
             Intent telaAddArtistaIntent = new Intent(this, TelaAdicionarArtistasActivity.class);
             startActivity(telaAddArtistaIntent);
