@@ -1,14 +1,22 @@
 package com.howiv.evento_.model;
 
+import android.widget.ImageView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Banda {
+
+    public ImageView logo;
     public String nome;
-    public Artista[] integrantes;
+    public List<Artista> integrantes = new ArrayList<>();
 
-    Banda(){}
+    public ImageView getLogo() {
+        return logo;
+    }
 
-    public Banda(String nome, Artista[] integrantes) {
-        this.nome = nome;
-        this.integrantes = integrantes;
+    public void setLogo(ImageView logo) {
+        this.logo = logo;
     }
 
     public String getNome() {
@@ -19,11 +27,20 @@ public class Banda {
         this.nome = nome;
     }
 
-    public Artista[] getIntegrantes() {
+    public List<Artista> getIntegrantes() {
         return integrantes;
     }
 
-    public void setIntegrantes(Artista[] integrantes) {
+    public void setIntegrantes(List<Artista> integrantes) {
         this.integrantes = integrantes;
     }
+
+    public void addIntegrante(Artista integrante) {
+        this.integrantes.add(integrante);
+    }
+
+    public void addIntegrantes(List<Artista> integrantes) {
+        this.integrantes.addAll(integrantes);
+    }
+
 }

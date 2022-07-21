@@ -3,7 +3,6 @@ package com.howiv.evento_.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,7 +34,7 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         ViewHolderClass vhClass = (ViewHolderClass)  holder;
         Artista artista = artistas.get(position);
         vhClass.text_nome.setText(artista.getNome());
-        vhClass.text_desc.setText(artista.getDesc());
+        vhClass.text_desc.setText(artista.getFuncoes());
         //vhClass.image_artista.setImage(conta.getOperation());
     }
 

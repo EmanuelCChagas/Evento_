@@ -2,25 +2,17 @@ package com.howiv.evento_.model;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Evento {
+
     public String titulo;
-    public LocalDateTime Data;
+    public LocalDateTime data;
     public String local;
     public DecimalFormat valorIngresso;
-
-    public Evento(){}
-
-    public Evento(String titulo, LocalDateTime data, String local, DecimalFormat valorIngresso, Banda[] bandas, Artista[] artistas) {
-        this.titulo = titulo;
-        Data = data;
-        this.local = local;
-        this.valorIngresso = valorIngresso;
-        this.bandas = bandas;
-        this.artistas = artistas;
-    }
-
-    public Banda[] bandas;
+    public List<Banda> bandas = new ArrayList<>();
+    public List<Artista> artistas = new ArrayList<>();
 
     public String getTitulo() {
         return titulo;
@@ -31,11 +23,11 @@ public class Evento {
     }
 
     public LocalDateTime getData() {
-        return Data;
+        return data;
     }
 
     public void setData(LocalDateTime data) {
-        Data = data;
+        this.data = data;
     }
 
     public String getLocal() {
@@ -54,21 +46,36 @@ public class Evento {
         this.valorIngresso = valorIngresso;
     }
 
-    public Banda[] getBandas() {
+    public List<Banda> getBandas() {
         return bandas;
     }
 
-    public void setBandas(Banda[] bandas) {
+    public void setBandas(List<Banda> bandas) {
         this.bandas = bandas;
     }
 
-    public Artista[] getArtistas() {
+    public List<Artista> getArtistas() {
         return artistas;
     }
 
-    public void setArtistas(Artista[] artistas) {
+    public void setArtistas(List<Artista> artistas) {
         this.artistas = artistas;
     }
 
-    public Artista[] artistas;
+    public void addBanda(Banda banda) {
+        this.bandas.add(banda);
+    }
+
+    public void addBandas(List<Banda> bandas) {
+        this.bandas.addAll(bandas);
+    }
+
+    public void addArtista(Artista artista) {
+        this.artistas.add(artista);
+    }
+
+    public void addArtistas(List<Artista> artistas) {
+        this.artistas.addAll(artistas);
+    }
+
 }

@@ -3,16 +3,18 @@ package com.howiv.evento_.model;
 import android.widget.ImageView;
 
 public class Artista {
-    public ImageView foto = null;
+
+    public ImageView foto;
     public String nome;
-    public String desc;
+    public String funcoes;
 
-    public Artista(){}
+    public Artista() {
+    }
 
-    public Artista(ImageView foto, String nome, String desc){
+    public Artista(ImageView foto, String nome, String funcoes) {
         this.foto = foto;
         this.nome = nome;
-        this.desc = desc;
+        this.funcoes = funcoes;
     }
 
     public ImageView getFoto() {
@@ -31,11 +33,12 @@ public class Artista {
         this.nome = nome;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getFuncoes() {
+        return funcoes;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setFuncoes(String funcoes) {
+        this.funcoes = funcoes;
     }
+
 }

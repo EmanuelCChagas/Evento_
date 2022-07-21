@@ -25,9 +25,9 @@ import com.howiv.evento_.model.Artista;
 
 public class TelaArtistasActivity extends AppCompatActivity {
 
-    List<Artista> artistas;
+    List<Artista> artistas = new ArrayList<>();
     RecyclerView recyclerView;
-     ArtistaAdapter artistaAdapter;
+    ArtistaAdapter artistaAdapter;
     DatabaseReference databaseReference;
 
     @Override
@@ -37,12 +37,12 @@ public class TelaArtistasActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView_artistas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        artistas = new ArrayList<>();
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Artistas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dn:snapshot.getChildren()){
+                for (DataSnapshot dn : snapshot.getChildren()) {
                     Artista artista = dn.getValue(Artista.class);
                     artistas.add(artista);
                     System.out.print(artista);
@@ -59,7 +59,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
 
     }
 
-    public void abrirTelaAddArtista(View v){
+    public void abrirTelaAddArtista(View v) {
         Intent telaAddArtistaIntent = new Intent(this, TelaAdicionarArtistasActivity.class);
         startActivity(telaAddArtistaIntent);
     }
