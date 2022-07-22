@@ -78,4 +78,14 @@ public class Evento {
         this.artistas.addAll(artistas);
     }
 
+    public Evento(){}
+
+    public Evento(String titulo, LocalDateTime data, String local, DecimalFormat valorIngresso, List<Banda> bandas, List<Artista> artistas) {
+        this.titulo = titulo;
+        this.data = data;
+        this.local = local;
+        this.valorIngresso = valorIngresso;
+        this.bandas = bandas;
+        this.artistas = artistas;
+    }
 }

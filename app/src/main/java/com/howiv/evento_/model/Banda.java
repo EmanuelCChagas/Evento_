@@ -11,6 +11,17 @@ public class Banda {
     public String nome;
     public List<Artista> integrantes = new ArrayList<>();
 
+
+    public Banda() {
+    }
+
+    public Banda(ImageView logo, String nome, List<Artista> integrantes) {
+        this.logo = logo;
+        this.nome = nome;
+        this.integrantes = integrantes;
+    }
+
+
     public ImageView getLogo() {
         return logo;
     }
@@ -42,5 +53,7 @@ public class Banda {
     public void addIntegrantes(List<Artista> integrantes) {
         this.integrantes.addAll(integrantes);
     }
+
+
 
 }
