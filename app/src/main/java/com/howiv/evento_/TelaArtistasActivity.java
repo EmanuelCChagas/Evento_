@@ -1,22 +1,20 @@
 package com.howiv.evento_;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewParent;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,14 +22,15 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.howiv.evento_.adapter.ArtistaAdapter;
 import com.howiv.evento_.model.Artista;
+import com.howiv.evento_.utils.ConfirmDialog;
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class TelaArtistasActivity extends AppCompatActivity {
 
     List<Artista> artistas = new ArrayList<>();
@@ -95,13 +94,30 @@ public class TelaArtistasActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    public void confirmaExclusaoDeArtistasSelecionados() {
+        // excluir os selecionados
+        if (artistasParaExcluir.isEmpty()) {
+            artistasParaExcluir.add(new Artista(null, "Super-Man", null));
+            artistasParaExcluir.add(new Artista(null, "Wonderwoman", null));
+        }
+
+        List<String> nomes = artistasParaExcluir.stream()
+                .map(a -> a.getNome())
+                .collect(Collectors.toList());
+
+        String nomesToast = String.join("\r\n", nomes);
+
+
+        Toast.makeText(this, nomesToast, Toast.LENGTH_LONG).show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.itemLixoArtista){
             obterArtistaListaExcluir();
-              if(artistasParaExcluir.size() > 0){
-                    //mostrar dialog para excluir
-              }
+//              if(artistasParaExcluir.size() > 0){
+                  ConfirmDialog.confirmDelete(this, this::confirmaExclusaoDeArtistasSelecionados);
+//              }
         }
         return super.onOptionsItemSelected(item);
     }
