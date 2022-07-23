@@ -20,9 +20,12 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
 
     List<Artista> artistas;
     public static List<Artista> listaCheckboxArtistas =new ArrayList<Artista>();
+    final private View.OnClickListener clickListener;
 
-    public ArtistaAdapter(List<Artista> artistas) {
+
+    public ArtistaAdapter(List<Artista> artistas, View.OnClickListener clickListener) {
         this.artistas = artistas;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -41,6 +44,14 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         vhClass.text_desc.setText(artista.getFuncoes());
         vhClass.checkBox_artista_selecionado.setChecked(false);
         //vhClass.image_artista.setImage(conta.getOperation());
+
+
+       // vhClass.layout_artista.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View view) {
+        //    }
+       // });
+        vhClass.layout_artista.setOnClickListener(clickListener);
 
         vhClass.layout_artista.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

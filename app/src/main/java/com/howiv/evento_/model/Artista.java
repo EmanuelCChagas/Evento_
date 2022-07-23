@@ -3,12 +3,11 @@ package com.howiv.evento_.model;
 import android.widget.ImageView;
 
 public class Artista {
+    public String id;
 
     public ImageView foto;
     public String nome;
     public String funcoes;
-
-    public boolean isSelecionado;
 
     public Artista() {
     }
@@ -19,13 +18,6 @@ public class Artista {
         this.funcoes = funcoes;
     }
 
-    public boolean isSelecionado() {
-        return isSelecionado;
-    }
-
-    public void setSelecionado(boolean selecionado) {
-        isSelecionado = selecionado;
-    }
 
     public ImageView getFoto() {
         return foto;
@@ -50,5 +42,14 @@ public class Artista {
     public void setFuncoes(String funcoes) {
         this.funcoes = funcoes;
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
 }

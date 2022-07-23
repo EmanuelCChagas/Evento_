@@ -2,6 +2,7 @@ package com.howiv.evento_;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +13,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,8 +38,10 @@ public class TelaArtistasActivity extends AppCompatActivity {
     List<Artista> artistasParaExcluir =  new ArrayList<Artista>();
     RecyclerView recyclerView;
     ArtistaAdapter artistaAdapter;
-    DatabaseReference databaseReference;
     ArtistaAdapter acessoArtistaAdapter;
+    View.OnClickListener clickListener;
+    DatabaseReference databaseReference;
+
 
 
     @Override
@@ -47,15 +52,33 @@ public class TelaArtistasActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView_artistas);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        clickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConstraintLayout layoutArtista = (ConstraintLayout) view.findViewById(R.id.idLayoutArtista);
+                int layoutArtistaId = layoutArtista.getId();
+                RecyclerView recViewParent = (RecyclerView)layoutArtista.getParent();
+                int layoutArtistaIndex = recViewParent.getChildAdapterPosition(layoutArtista);
+                for (int i = 0; i < artistas.size(); i++) {
+                   if(artistas.get(i) == null){
+                       artistas.remove(i);
+                   }
+                }
+                //editar artistas tela
+
+            }
+        };
+
         databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseReference.child("Artistas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dn : snapshot.getChildren()) {
                     Artista artista = dn.getValue(Artista.class);
+                    artista.id = dn.getKey();
                     artistas.add(artista);
                     System.out.print(artista);
-                    artistaAdapter = new ArtistaAdapter(artistas);
+                    artistaAdapter = new ArtistaAdapter(artistas,clickListener);
                     recyclerView.setAdapter(artistaAdapter);
                 }
             }
@@ -77,7 +100,9 @@ public class TelaArtistasActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.itemLixoArtista){
             obterArtistaListaExcluir();
-                //excluir
+              if(artistasParaExcluir.size() > 0){
+
+              }
         }
         return super.onOptionsItemSelected(item);
     }
