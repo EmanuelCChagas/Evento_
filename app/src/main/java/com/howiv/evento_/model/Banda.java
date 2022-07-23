@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Banda {
 
+    public String id;
     public ImageView logo;
     public String nome;
     public List<Artista> integrantes = new ArrayList<>();

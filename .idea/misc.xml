@@ -3,12 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/drawable/ic_baseline_event_note_24.xml" value="0.333" />
         <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/activity_tela_adicionar_artistas.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/activity_tela_adicionar_bandas.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/activity_tela_artistas.xml" value="0.17831813576494426" />
+        <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/activity_tela_bandas.xml" value="0.33" />
         <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/artista_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/banda_item.xml" value="0.365625" />
         <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/layout/evento_item.xml" value="0.365625" />
         <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/menu/menu_artista.xml" value="0.1125" />
+        <entry key="..\:/Users/Emanuel/AndroidStudioProjects/Evento_/app/src/main/res/menu/menu_banda.xml" value="0.36666666666666664" />
         <entry key="..\:/workspace/Evento_/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
         <entry key="..\:/workspace/Evento_/app/src/main/res/layout/activity_tela_artistas.xml" value="0.36666666666666664" />
         <entry key="..\:/workspace/Evento_/app/src/main/res/layout/activity_tela_bandas.xml" value="0.36666666666666664" />

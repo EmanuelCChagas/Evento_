@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Evento {
 
+    public String id;
     public String titulo;
     public LocalDateTime data;
     public String local;

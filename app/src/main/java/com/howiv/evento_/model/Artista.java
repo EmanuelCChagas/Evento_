@@ -3,8 +3,8 @@ package com.howiv.evento_.model;
 import android.widget.ImageView;
 
 public class Artista {
-    public String id;
 
+    public String id;
     public ImageView foto;
     public String nome;
     public String funcoes;

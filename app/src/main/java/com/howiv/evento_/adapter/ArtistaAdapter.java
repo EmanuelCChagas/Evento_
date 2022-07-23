@@ -43,14 +43,7 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         vhClass.text_nome.setText(artista.getNome());
         vhClass.text_desc.setText(artista.getFuncoes());
         vhClass.checkBox_artista_selecionado.setChecked(false);
-        //vhClass.image_artista.setImage(conta.getOperation());
 
-
-       // vhClass.layout_artista.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View view) {
-        //    }
-       // });
         vhClass.layout_artista.setOnClickListener(clickListener);
 
         vhClass.layout_artista.setOnLongClickListener(new View.OnLongClickListener() {
@@ -82,7 +75,6 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
             }
         });
     }
-
 
     @Override
     public int getItemCount() {
