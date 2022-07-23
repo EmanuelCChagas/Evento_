@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import android.content.Context;
+
+import com.howiv.evento_.utils.ConfirmDialog;
+
 /**
  * Example local unit test, which will execute on the development machine (host).
  *
