@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idLayoutArtista"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/fotoArtista"
@@ -14,36 +15,44 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <TextView
         android:id="@+id/nomeArtista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/app_artistas_recycle_item_artista_nome"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
+        android:layout_width="189dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
         android:maxLines="2"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintStart_toEndOf="@id/fotoArtista"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/app_artistas_recycle_item_artista_nome"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fotoArtista"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/descArtista"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="186dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="28dp"
         android:maxLines="4"
         android:text="@string/app_artistas_recycle_item_artista_desc"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/fotoArtista"
         app:layout_constraintTop_toBottomOf="@+id/nomeArtista" />
+
+    <CheckBox
+        android:id="@+id/checkBox_artista"
+        android:layout_width="58dp"
+        android:layout_height="51dp"
+        android:layout_marginEnd="16dp"
+        android:checked="false"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

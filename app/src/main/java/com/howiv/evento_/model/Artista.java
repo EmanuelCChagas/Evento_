@@ -8,6 +8,8 @@ public class Artista {
     public String nome;
     public String funcoes;
 
+    public boolean isSelecionado;
+
     public Artista() {
     }
 
@@ -15,6 +17,14 @@ public class Artista {
         this.foto = foto;
         this.nome = nome;
         this.funcoes = funcoes;
+    }
+
+    public boolean isSelecionado() {
+        return isSelecionado;
+    }
+
+    public void setSelecionado(boolean selecionado) {
+        isSelecionado = selecionado;
     }
 
     public ImageView getFoto() {
