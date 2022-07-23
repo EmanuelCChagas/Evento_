@@ -56,7 +56,6 @@ public class TelaArtistasActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ConstraintLayout layoutArtista = (ConstraintLayout) view.findViewById(R.id.idLayoutArtista);
-                int layoutArtistaId = layoutArtista.getId();
                 RecyclerView recViewParent = (RecyclerView)layoutArtista.getParent();
                 int layoutArtistaIndex = recViewParent.getChildAdapterPosition(layoutArtista);
                 for (int i = 0; i < artistas.size(); i++) {
@@ -65,6 +64,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
                    }
                 }
                 //editar artistas tela
+                //artistas.get(layoutArtistaIndex);
 
             }
         };
@@ -77,7 +77,6 @@ public class TelaArtistasActivity extends AppCompatActivity {
                     Artista artista = dn.getValue(Artista.class);
                     artista.id = dn.getKey();
                     artistas.add(artista);
-                    System.out.print(artista);
                     artistaAdapter = new ArtistaAdapter(artistas,clickListener);
                     recyclerView.setAdapter(artistaAdapter);
                 }
@@ -101,7 +100,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
         if(item.getItemId() == R.id.itemLixoArtista){
             obterArtistaListaExcluir();
               if(artistasParaExcluir.size() > 0){
-
+                    //mostrar dialog para excluir
               }
         }
         return super.onOptionsItemSelected(item);
