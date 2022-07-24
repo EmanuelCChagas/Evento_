@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/idLayoutArtista"
+    android:id="@+id/idLayoutBanda"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/fotoArtista"
+        android:id="@+id/fotoBanda"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_margin="10dp"
@@ -17,35 +16,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/nomeArtista"
+        android:id="@+id/nomeBanda"
+
         android:layout_width="189dp"
         android:layout_height="38dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:maxLines="2"
-        android:text="@string/app_artistas_recycle_item_artista_nome"
+        android:text="@string/app_bandas_recycle_item_bandas_nome"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/fotoArtista"
+        app:layout_constraintStart_toEndOf="@id/fotoBanda"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descArtista"
+        android:id="@+id/integrantesBanda"
         android:layout_width="186dp"
         android:layout_height="38dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="28dp"
         android:maxLines="4"
-        android:text="@string/app_artistas_recycle_item_artista_desc"
+        android:text="@string/app_bandas_recycle_item_bandas_integrantes"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/fotoArtista"
-        app:layout_constraintTop_toBottomOf="@+id/nomeArtista" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/fotoBanda"
+        app:layout_constraintTop_toBottomOf="@+id/nomeBanda" />
 
     <CheckBox
-        android:id="@+id/checkBox_artista"
+        android:id="@+id/checkBox_banda"
         android:layout_width="58dp"
         android:layout_height="51dp"
         android:layout_marginEnd="16dp"

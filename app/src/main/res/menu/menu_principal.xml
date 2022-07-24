@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="@string/app_menu_minha_conta"
+        android:id="@+id/itemConta"
+        android:orderInCategory="100"
+        >
+
+    </item>
+    <item android:title="@string/app_menu_eventos"
+        android:id="@+id/itemEventos"
+        android:orderInCategory="200">
+
+    </item>
+    <item android:title="@string/app_menu_artistas"
+        android:id="@+id/itemArtistas"
+        android:orderInCategory="300">
+
+    </item>
+    <item android:title="@string/app_menu_bandas"
+        android:id="@+id/itemBandas"
+        android:orderInCategory="400">
+
+    </item>
+    <item android:title="@string/app_menu_sair"
+        android:id="@+id/itemSair"
+        android:orderInCategory="500">
+
+    </item>
+
+</menu>

@@ -7,4 +7,6 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="adicionar_integrante_btn_color">#3f38dd</color>
+    <color name="geral_sistema">#FF4E71AE</color>
 </resources>

@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">Evento_</string>
+    <string name="app_menu_minha_conta">Minha Conta</string>
+    <string name="app_menu_eventos">Eventos</string>
+    <string name="app_menu_artistas">Artistas</string>
+    <string name="app_menu_bandas">Bandas</string>
+    <string name="app_menu_sair">Sair</string>
+
+    <string name="app_artistas_btn_adicionar">Adicionar</string>
+    <string name="app_artistas_btn_Novo">Novo</string>
+    <string name="app_artistas_titulo">Artistas</string>
+    <string name="app_artistas_nome_padrao"> Artista</string>
+    <string name="app_artistas_funcao_padrao"> Função</string>
+    <string name="app_artistas_imagem_padrao_descricao"> Imagem do Artista</string>
+    <string name="app_artistas_recycle_item_artista_nome">Artista</string>
+    <string name="app_artistas_recycle_item_artista_desc">Descrição</string>
+
+    <string name="app_adicionar_artistas_btn_salvar">Salvar</string>
+    <string name="app_adicionar_artistas_input_nome">Nome</string>
+    <string name="app_adicionar_artistas_input_funcoes">Funções</string>
+
+    <string name="app_adicionar_bandas_btn_salvar">Salvar</string>
+    <string name="app_adicionar_bandas_input_nome">Nome</string>
+    <string name="app_adicionar_bandas_text_integrantes">Integrantes</string>
+    <string name="app_adicionar_bandas_input_add_integrantes">Adicionar Integrante...</string>
+
+    <string name="app_bandas_nome_padrao"> Bandas</string>
+    <string name="app_bandas_integrantes_padrao"> Integrantes</string>
+    <string name="app_bandas_imagem_padrao_descricao"> Imagem da Banda</string>
+    <string name="app_bandas_recycle_item_bandas_nome">Banda</string>
+    <string name="app_bandas_recycle_item_bandas_integrantes">Integrantes</string>
+
+    <string name="app_adicionar_eventos_btn_salvar">Salvar</string>
+    <string name="app_adicionar_eventos_input_titulo">Titulo</string>
+    <string name="app_adicionar_eventos_input_data_hora">Data</string>
+    <string name="app_adicionar_eventos_input_local">Local</string>
+    <string name="app_adicionar_eventos_input_Ingresso">Ingresso</string>
+
+    <string name="app_eventos_nome_padrao"> Eventos</string>
+    <string name="app_eventos_titulo_padrao"> Titulo</string>
+    <string name="app_eventos_data_hora_padrao"> 10 jun,2022</string>
+    <string name="app_eventos_imagem_padrao_descricao"> Imagem do Evento</string>
+    <string name="app_eventos_recycle_item_eventos_titulo">Evento</string>
+    <string name="app_eventos_recycle_item_eventos_data_hora">10 jun,2022 - 19:00 - 20:00</string>
+
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "294091280357",
+    "project_id": "evento-howvi",
+    "storage_bucket": "evento-howvi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294091280357:android:8ac7772e9990dab91fa90c",
+        "android_client_info": {
+          "package_name": "com.howiv.evento_"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294091280357-634fkmu5up1qbuhs9vqikqb71l63r9pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlB-na_GpAD4cH_QilPlR3K9uSUJ_DQqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294091280357-634fkmu5up1qbuhs9vqikqb71l63r9pt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
