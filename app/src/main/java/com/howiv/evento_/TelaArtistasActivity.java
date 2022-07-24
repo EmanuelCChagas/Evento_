@@ -15,12 +15,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -75,22 +78,25 @@ public class TelaArtistasActivity extends AppCompatActivity {
         clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ConstraintLayout layoutArtista = (ConstraintLayout) view.findViewById(R.id.idLayoutArtista);
-                RecyclerView recViewParent = (RecyclerView)layoutArtista.getParent();
-                int layoutArtistaIndex = recViewParent.getChildAdapterPosition(layoutArtista);
-                for (int i = 0; i < artistas.size(); i++) {
-                   if(artistas.get(i) == null){
-                       artistas.remove(i);
-                   }
+                CheckBox checkboxArtista = view.findViewById(R.id.checkBox_artista);
+                if(checkboxArtista.getVisibility() == View.INVISIBLE) {
+                    ConstraintLayout layoutArtista = (ConstraintLayout) view.findViewById(R.id.idLayoutArtista);
+                    RecyclerView recViewParent = (RecyclerView) layoutArtista.getParent();
+                    int layoutArtistaIndex = recViewParent.getChildAdapterPosition(layoutArtista);
+                    for (int i = 0; i < artistas.size(); i++) {
+                        if (artistas.get(i) == null) {
+                            artistas.remove(i);
+                        }
+                    }
+                    //editar artistas tela
+                    Artista artistaParaEditar = artistas.get(layoutArtistaIndex);
+                    Intent i = new Intent(TelaArtistasActivity.this, TelaAdicionarEditarArtistasActivity.class);
+                    i.putExtra("EditarArtista", true);
+                    Gson gson = new Gson();
+                    String artistaEditarJson = gson.toJson(artistaParaEditar);
+                    i.putExtra("EditarArtistaDados", artistaEditarJson);
+                    startActivity(i);
                 }
-                //editar artistas tela
-                Artista artistaParaEditar = artistas.get(layoutArtistaIndex);
-                Intent i = new Intent(TelaArtistasActivity.this, TelaAdicionarEditarArtistasActivity.class);
-                i.putExtra("EditarArtista",true);
-                Gson gson = new Gson();
-                String artistaEditarJson = gson.toJson(artistaParaEditar);
-                i.putExtra("EditarArtistaDados", artistaEditarJson);
-                startActivity(i);
             }
         };
 
@@ -116,7 +122,6 @@ public class TelaArtistasActivity extends AppCompatActivity {
 
    @Override
    protected void onResume() {
-       artistas.clear();
        databaseReference = FirebaseDatabase.getInstance().getReference();
        databaseReference.child("Artistas").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
            @Override
@@ -125,6 +130,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
                if (!task.isSuccessful()) {
                    Toast.makeText(TelaArtistasActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                } else {
+                   artistas.clear();
                    for (DataSnapshot dn : task.getResult().getChildren()) {
                        Artista artista = dn.getValue(Artista.class);
                        artista.id = dn.getKey();
@@ -151,6 +157,30 @@ public class TelaArtistasActivity extends AppCompatActivity {
             artistasParaExcluir.add(new Artista(null, "Wonderwoman", null));
         }
 
+        for (int i = 0; i < artistasParaExcluir.size(); i++) {
+            if(artistasParaExcluir.get(i).id != null){
+                String idExcluir = artistasParaExcluir.get(i).id;
+                databaseReference.child("Artistas").child(idExcluir).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(TelaArtistasActivity.this,"Artista Deletado com Sucesso", Toast.LENGTH_LONG).show();
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(TelaArtistasActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+            }
+
+        }
+
+
+
+
+
         List<String> nomes = artistasParaExcluir.stream()
                 .map(a -> a.getNome())
                 .collect(Collectors.toList());
@@ -158,7 +188,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
         String nomesToast = String.join("\r\n", nomes);
 
 
-        Toast.makeText(this, nomesToast, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, nomesToast, Toast.LENGTH_LONG).show();
     }
 
     @Override
