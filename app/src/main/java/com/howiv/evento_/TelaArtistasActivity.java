@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,6 +50,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
     Boolean adicionarArtistaBandaActivity = false;
     List<Artista> artistas = new ArrayList<>();
     List<Artista> artistasParaExcluir =  new ArrayList<Artista>();
+    List<Artista> artistasParaAdicionarBanda =  new ArrayList<Artista>();
     Menu menuArtista;
     RecyclerView recyclerView;
     ArtistaAdapter artistaAdapter;
@@ -56,7 +59,6 @@ public class TelaArtistasActivity extends AppCompatActivity {
     View.OnLongClickListener longClickListener;
     View.OnClickListener checkboxClickListener;
     DatabaseReference databaseReference;
-    Boolean isCheckboxActive = false;
 
 
 
@@ -70,12 +72,15 @@ public class TelaArtistasActivity extends AppCompatActivity {
         if (extras != null) {
             adicionarArtistaBandaActivity = extras.getBoolean("AdicionarBanda");
             if(adicionarArtistaBandaActivity){
-                Button novoArtistaButton = findViewById(R.id.btn_novo_artistas);
+                MaterialButton novoArtistaButton = findViewById(R.id.btn_novo_artistas);
                 getSupportActionBar().setTitle("Adicionar Artistas");
-                ViewGroup layout = (ViewGroup) novoArtistaButton.getParent();
-                if(null!=layout)
-                    layout.removeView(novoArtistaButton);
-
+                LinearLayout layout = (LinearLayout) novoArtistaButton.getParent();
+               if(layout != null){
+                   layout.removeView(novoArtistaButton);
+               }
+                setAllCheckboxVisibility(true);
+                MaterialButton adicionarArtistaBanda = findViewById(R.id.btn_adicionar_artistas_banda);
+                adicionarArtistaBanda.setVisibility(View.VISIBLE);
             }
         }
         recyclerView = findViewById(R.id.recyclerView_artistas);
@@ -140,14 +145,28 @@ public class TelaArtistasActivity extends AppCompatActivity {
                 int layoutCardArtistaIndex = recViewParent.getChildAdapterPosition(layoutCardArtista);
                 Artista artistaEscolhido = artistas.get(layoutCardArtistaIndex);
 
-                        boolean isChecked =  checkboxArtista.isChecked();
-                        if(isChecked){
-                            artistasParaExcluir.add(artistaEscolhido);
-                        }else{
-                            if(artistasParaExcluir.size() > 0){
-                                artistasParaExcluir.remove(artistaEscolhido);
-                            }
+                //caso for para adicionar artista numa banda pega o item e poe na lista e adicionar artistabanda
+                //do contrario pega o item e coloca na lista de excluir
+                if(adicionarArtistaBandaActivity){
+                    boolean isChecked =  checkboxArtista.isChecked();
+                    if(isChecked){
+                        artistasParaAdicionarBanda.add(artistaEscolhido);
+                    }else{
+                        if(artistasParaAdicionarBanda.size() > 0){
+                            artistasParaAdicionarBanda.remove(artistaEscolhido);
                         }
+                    }
+                }
+                else{
+                    boolean isChecked =  checkboxArtista.isChecked();
+                    if(isChecked){
+                        artistasParaExcluir.add(artistaEscolhido);
+                    }else{
+                        if(artistasParaExcluir.size() > 0){
+                            artistasParaExcluir.remove(artistaEscolhido);
+                        }
+                    }
+                }
             }
         };
 
@@ -257,13 +276,12 @@ public class TelaArtistasActivity extends AppCompatActivity {
 
     public boolean setAllCheckboxVisibility(boolean visibilidade) {
         try {
-
             if (visibilidade) {
                 artistaAdapter.mudarVisibilidadeTodosCheckbox(true);
                 for (int i = 0; i < artistaAdapter.getItemCount(); i++) {
                     // colocar todos os checkbox visiveis
                     artistaAdapter.notifyItemChanged(i);
-                    if(menuArtista != null)
+                    if(menuArtista != null && adicionarArtistaBandaActivity == false)
                           menuArtista.findItem(R.id.itemLixoArtista).setVisible(true);
                 }
                 return true;
@@ -272,7 +290,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
                 for (int i = 0; i < artistaAdapter.getItemCount(); i++) {
                     // colocar todos os checkbox visiveis
                     artistaAdapter.notifyItemChanged(i);
-                    if(menuArtista != null)
+                    if(menuArtista != null && adicionarArtistaBandaActivity == false)
                         menuArtista.findItem(R.id.itemLixoArtista).setVisible(false);
                 }
                 return true;
@@ -282,5 +300,14 @@ public class TelaArtistasActivity extends AppCompatActivity {
             Log.d("Error",ex.getMessage());
             return false;
         }
+    }
+
+    public void passarArtistasParaBandas(View view){
+        Intent resultIntent = new Intent();
+        Gson gson = new Gson();
+        String artistaListaJson = gson.toJson(artistasParaAdicionarBanda);
+        resultIntent.putExtra("dadosArtistaLista",artistaListaJson);
+        setResult(RESULT_OK,resultIntent);
+        finish();
     }
 }

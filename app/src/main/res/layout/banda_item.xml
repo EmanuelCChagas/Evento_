@@ -1,60 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/idLayoutBanda"
+    android:id="@+id/cardBanda"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="90dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginBottom="0dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/idLayoutBanda"
+        style="@style/CardItem">
 
     <ImageView
         android:id="@+id/fotoBanda"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_margin="10dp"
-        android:src="@drawable/ic_launcher_background"
+        style="@style/CardItemImage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nomeBanda"
-
-        android:layout_width="189dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="16dp"
-        android:maxLines="2"
+        style="@style/CardItemTitle"
         android:text="@string/app_bandas_recycle_item_bandas_nome"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/checkBox_banda"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@id/fotoBanda"
+        app:layout_constraintStart_toEndOf="@+id/fotoBanda"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/integrantesBanda"
-        android:layout_width="186dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="28dp"
-        android:maxLines="4"
+        style="@style/CardItemDescription"
         android:text="@string/app_bandas_recycle_item_bandas_integrantes"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/fotoBanda"
         app:layout_constraintTop_toBottomOf="@+id/nomeBanda" />
 
     <CheckBox
         android:id="@+id/checkBox_banda"
-        android:layout_width="58dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:checked="false"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -20,12 +20,19 @@ import java.util.List;
 
 public class BandaAdapter  extends RecyclerView.Adapter {
     List<Banda> bandas;
-    public static List<Banda> listaCheckboxBandas =new ArrayList<Banda>();
     final private View.OnClickListener clickListener;
+    final private View.OnLongClickListener longClickListener;
+    final private View.OnClickListener checkboxClickListener;
+    private static boolean deixarTodosCheckboxVisiveis = false;
 
-    public BandaAdapter(List<Banda> bandas, View.OnClickListener clickListener) {
+    public BandaAdapter(List<Banda> bandas,
+                        View.OnClickListener clickListener,
+                        View.OnLongClickListener longClickListener,
+                        View.OnClickListener checkboxClickListener) {
         this.bandas = bandas;
         this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
+        this.checkboxClickListener = checkboxClickListener;
     }
 
     @NonNull
@@ -48,34 +55,15 @@ public class BandaAdapter  extends RecyclerView.Adapter {
 
         vhClass.layout_banda.setOnClickListener(clickListener);
 
-        vhClass.layout_banda.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(vhClass.checkBox_banda_selecionado.getVisibility() == View.INVISIBLE){
-                    vhClass.checkBox_banda_selecionado.setVisibility(View.VISIBLE);
-                    vhClass.checkBox_banda_selecionado.setChecked(true);
-                    listaCheckboxBandas.add(banda);
-                }
-                else{
-                    vhClass.checkBox_banda_selecionado.setVisibility(View.INVISIBLE);
-                }
-                return false;
-            }
-        });
+        if(deixarTodosCheckboxVisiveis){
+            vhClass.checkBox_banda_selecionado.setVisibility(View.VISIBLE);
+        }
+        else{
+            vhClass.checkBox_banda_selecionado.setVisibility(View.INVISIBLE);
+        }
 
-        vhClass.checkBox_banda_selecionado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isChecked =  vhClass.checkBox_banda_selecionado.isChecked();
-                if(isChecked){
-                    listaCheckboxBandas.add(banda);
-                }else{
-                    if(listaCheckboxBandas.size() > 0){
-                        listaCheckboxBandas.remove(banda);
-                    }
-                }
-            }
-        });
+        vhClass.layout_banda.setOnLongClickListener(longClickListener);
+        vhClass.checkBox_banda_selecionado.setOnClickListener(checkboxClickListener);
     }
 
     @Override
@@ -98,5 +86,9 @@ public class BandaAdapter  extends RecyclerView.Adapter {
             checkBox_banda_selecionado = itemView.findViewById(R.id.checkBox_banda);
             layout_banda = itemView.findViewById(R.id.idLayoutBanda);
         }
+    }
+
+    public static void mudarVisibilidadeTodosCheckbox(boolean visibilidade){
+        deixarTodosCheckboxVisiveis = visibilidade;
     }
 }

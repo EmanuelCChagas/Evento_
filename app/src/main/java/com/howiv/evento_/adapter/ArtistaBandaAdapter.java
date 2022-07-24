@@ -1,39 +1,27 @@
 package com.howiv.evento_.adapter;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.TextView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.CheckBox;
+        import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
+        import androidx.annotation.NonNull;
+        import androidx.constraintlayout.widget.ConstraintLayout;
+        import androidx.recyclerview.widget.RecyclerView;
 
-import com.howiv.evento_.R;
-import com.howiv.evento_.model.Artista;
+        import com.howiv.evento_.R;
+        import com.howiv.evento_.model.Artista;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 
-public class ArtistaAdapter extends RecyclerView.Adapter {
+public class ArtistaBandaAdapter extends RecyclerView.Adapter {
 
     List<Artista> artistas;
-    final private View.OnClickListener clickListener;
-    final private View.OnLongClickListener longClickListener;
-    final private View.OnClickListener checkboxClickListener;
-    private static boolean deixarTodosCheckboxVisiveis = false;
 
-
-    public ArtistaAdapter(
-            List<Artista> artistas,
-            View.OnClickListener clickListener,
-            View.OnLongClickListener longClickListener,
-            View.OnClickListener checkboxClickListener) {
+    public ArtistaBandaAdapter(List<Artista> artistas) {
         this.artistas = artistas;
-        this.clickListener = clickListener;
-        this.longClickListener = longClickListener;
-        this.checkboxClickListener = checkboxClickListener;
     }
 
     public List<Artista> getData(){
@@ -55,15 +43,7 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         vhClass.text_nome.setText(artista.getNome());
         vhClass.text_desc.setText(artista.getFuncoes());
         vhClass.checkBox_artista_selecionado.setChecked(false);
-        if(deixarTodosCheckboxVisiveis){
-            vhClass.checkBox_artista_selecionado.setVisibility(View.VISIBLE);
-        }
-        else{
-            vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
-        }
-        vhClass.layout_artista.setOnClickListener(clickListener);
-        vhClass.layout_artista.setOnLongClickListener(longClickListener);
-        vhClass.checkBox_artista_selecionado.setOnClickListener(checkboxClickListener);
+        vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -86,9 +66,5 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
             layout_artista = itemView.findViewById(R.id.idLayoutArtista);
 
         }
-    }
-
-    public static void mudarVisibilidadeTodosCheckbox(boolean visibilidade){
-        deixarTodosCheckboxVisiveis = visibilidade;
     }
 }

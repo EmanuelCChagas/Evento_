@@ -12,6 +12,13 @@
         style="@style/ListView" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_adicionar_artistas_banda"
+        style="@style/BtnPrimary"
+        android:visibility="invisible"
+        android:onClick="passarArtistasParaBandas"
+        android:text="@string/app_adicionar_artistas_btn_salvar" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_novo_artistas"
         style="@style/BtnPrimary"
         android:onClick="abrirTelaAddArtista"
