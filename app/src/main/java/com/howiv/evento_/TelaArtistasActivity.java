@@ -48,6 +48,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
     Boolean adicionarArtistaBandaActivity = false;
     List<Artista> artistas = new ArrayList<>();
     List<Artista> artistasParaExcluir =  new ArrayList<Artista>();
+    Menu menuArtista;
     RecyclerView recyclerView;
     ArtistaAdapter artistaAdapter;
     ArtistaAdapter acessoArtistaAdapter;
@@ -114,9 +115,11 @@ public class TelaArtistasActivity extends AppCompatActivity {
             public boolean onLongClick(View view) {
                 CheckBox checkboxArtista = view.findViewById(R.id.checkBox_artista);
                 if (checkboxArtista.getVisibility() == View.INVISIBLE) {
-                    setAllCheckboxVisibility(true);
+                    boolean isCheckboxMudado = setAllCheckboxVisibility(true);
                     //checkboxArtista.setVisibility(View.VISIBLE);
-                    checkboxArtista.setChecked(true);
+                    if(isCheckboxMudado){
+                        checkboxArtista.setChecked(true);
+                    }
                 } else {
                     setAllCheckboxVisibility(false);
                     checkboxArtista.setVisibility(View.INVISIBLE);
@@ -194,6 +197,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        menuArtista = menu;
         getMenuInflater().inflate(R.menu.menu_artista, menu);
         return super.onCreateOptionsMenu(menu);
     }
@@ -251,15 +255,32 @@ public class TelaArtistasActivity extends AppCompatActivity {
         startActivity(telaAddArtistaIntent);
     }
 
-    public void setAllCheckboxVisibility(boolean visibilidade){
-        if(visibilidade){
-            for (int i = 0; i < artistas.size(); i++) {
-                // colocar todos os checkbox visiveis
+    public boolean setAllCheckboxVisibility(boolean visibilidade) {
+        try {
+
+            if (visibilidade) {
+                artistaAdapter.mudarVisibilidadeTodosCheckbox(true);
+                for (int i = 0; i < artistaAdapter.getItemCount(); i++) {
+                    // colocar todos os checkbox visiveis
+                    artistaAdapter.notifyItemChanged(i);
+                    if(menuArtista != null)
+                          menuArtista.findItem(R.id.itemLixoArtista).setVisible(true);
+                }
+                return true;
+            } else {
+                artistaAdapter.mudarVisibilidadeTodosCheckbox(false);
+                for (int i = 0; i < artistaAdapter.getItemCount(); i++) {
+                    // colocar todos os checkbox visiveis
+                    artistaAdapter.notifyItemChanged(i);
+                    if(menuArtista != null)
+                        menuArtista.findItem(R.id.itemLixoArtista).setVisible(false);
+                }
+                return true;
             }
-        }
-        else{
-            // colocar todos os checkbox invisiveis
+
+        } catch (Exception ex) {
+            Log.d("Error",ex.getMessage());
+            return false;
         }
     }
-
 }

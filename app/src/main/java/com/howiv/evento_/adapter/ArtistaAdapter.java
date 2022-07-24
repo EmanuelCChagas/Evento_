@@ -23,6 +23,7 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
     final private View.OnClickListener clickListener;
     final private View.OnLongClickListener longClickListener;
     final private View.OnClickListener checkboxClickListener;
+    private static boolean deixarTodosCheckboxVisiveis = false;
 
 
     public ArtistaAdapter(
@@ -34,6 +35,10 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         this.clickListener = clickListener;
         this.longClickListener = longClickListener;
         this.checkboxClickListener = checkboxClickListener;
+    }
+
+    public List<Artista> getData(){
+        return this.artistas;
     }
 
     @NonNull
@@ -51,7 +56,12 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         vhClass.text_nome.setText(artista.getNome());
         vhClass.text_desc.setText(artista.getFuncoes());
         vhClass.checkBox_artista_selecionado.setChecked(false);
-        vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
+        if(deixarTodosCheckboxVisiveis){
+            vhClass.checkBox_artista_selecionado.setVisibility(View.VISIBLE);
+        }
+        else{
+            vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
+        }
         vhClass.layout_artista.setOnClickListener(clickListener);
         vhClass.layout_artista.setOnLongClickListener(longClickListener);
         vhClass.checkBox_artista_selecionado.setOnClickListener(checkboxClickListener);
@@ -77,5 +87,9 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
             layout_artista = itemView.findViewById(R.id.idLayoutArtista);
 
         }
+    }
+
+    public static void mudarVisibilidadeTodosCheckbox(boolean visibilidade){
+        deixarTodosCheckboxVisiveis = visibilidade;
     }
 }
