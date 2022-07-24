@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,7 +52,10 @@ public class TelaArtistasActivity extends AppCompatActivity {
     ArtistaAdapter artistaAdapter;
     ArtistaAdapter acessoArtistaAdapter;
     View.OnClickListener clickListener;
+    View.OnLongClickListener longClickListener;
+    View.OnClickListener checkboxClickListener;
     DatabaseReference databaseReference;
+    Boolean isCheckboxActive = false;
 
 
 
@@ -80,16 +85,20 @@ public class TelaArtistasActivity extends AppCompatActivity {
             public void onClick(View view) {
                 CheckBox checkboxArtista = view.findViewById(R.id.checkBox_artista);
                 if(checkboxArtista.getVisibility() == View.INVISIBLE) {
+                    //obter index do artista para editar
                     ConstraintLayout layoutArtista = (ConstraintLayout) view.findViewById(R.id.idLayoutArtista);
-                    RecyclerView recViewParent = (RecyclerView) layoutArtista.getParent();
-                    int layoutArtistaIndex = recViewParent.getChildAdapterPosition(layoutArtista);
+                    MaterialCardView layoutCardArtista = (MaterialCardView) layoutArtista.getParent();
+                    RecyclerView recViewParent = (RecyclerView) layoutCardArtista.getParent();
+                    int layoutCardArtistaIndex = recViewParent.getChildAdapterPosition(layoutCardArtista);
+
+                    //caso algum artista for null retirar da lista
                     for (int i = 0; i < artistas.size(); i++) {
                         if (artistas.get(i) == null) {
                             artistas.remove(i);
                         }
                     }
                     //editar artistas tela
-                    Artista artistaParaEditar = artistas.get(layoutArtistaIndex);
+                    Artista artistaParaEditar = artistas.get(layoutCardArtistaIndex);
                     Intent i = new Intent(TelaArtistasActivity.this, TelaAdicionarEditarArtistasActivity.class);
                     i.putExtra("EditarArtista", true);
                     Gson gson = new Gson();
@@ -97,6 +106,45 @@ public class TelaArtistasActivity extends AppCompatActivity {
                     i.putExtra("EditarArtistaDados", artistaEditarJson);
                     startActivity(i);
                 }
+            }
+        };
+
+        longClickListener = new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                CheckBox checkboxArtista = view.findViewById(R.id.checkBox_artista);
+                if (checkboxArtista.getVisibility() == View.INVISIBLE) {
+                    setAllCheckboxVisibility(true);
+                    //checkboxArtista.setVisibility(View.VISIBLE);
+                    checkboxArtista.setChecked(true);
+                } else {
+                    setAllCheckboxVisibility(false);
+                    checkboxArtista.setVisibility(View.INVISIBLE);
+                }
+                return true;
+            }
+        };
+
+        checkboxClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckBox checkboxArtista = view.findViewById(R.id.checkBox_artista);
+
+                //obter index do artista
+                ConstraintLayout layoutArtista = (ConstraintLayout) checkboxArtista.getParent();
+                MaterialCardView layoutCardArtista = (MaterialCardView) layoutArtista.getParent();
+                RecyclerView recViewParent = (RecyclerView) layoutCardArtista.getParent();
+                int layoutCardArtistaIndex = recViewParent.getChildAdapterPosition(layoutCardArtista);
+                Artista artistaEscolhido = artistas.get(layoutCardArtistaIndex);
+
+                        boolean isChecked =  checkboxArtista.isChecked();
+                        if(isChecked){
+                            artistasParaExcluir.add(artistaEscolhido);
+                        }else{
+                            if(artistasParaExcluir.size() > 0){
+                                artistasParaExcluir.remove(artistaEscolhido);
+                            }
+                        }
             }
         };
 
@@ -108,7 +156,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
                     Artista artista = dn.getValue(Artista.class);
                     artista.id = dn.getKey();
                     artistas.add(artista);
-                    artistaAdapter = new ArtistaAdapter(artistas,clickListener);
+                    artistaAdapter = new ArtistaAdapter(artistas,clickListener,longClickListener,checkboxClickListener);
                     recyclerView.setAdapter(artistaAdapter);
                 }
             }
@@ -135,7 +183,7 @@ public class TelaArtistasActivity extends AppCompatActivity {
                        Artista artista = dn.getValue(Artista.class);
                        artista.id = dn.getKey();
                        artistas.add(artista);
-                       artistaAdapter = new ArtistaAdapter(artistas, clickListener);
+                       artistaAdapter = new ArtistaAdapter(artistas, clickListener,longClickListener,checkboxClickListener);
                        recyclerView.setAdapter(artistaAdapter);
                    }
                }
@@ -177,10 +225,6 @@ public class TelaArtistasActivity extends AppCompatActivity {
 
         }
 
-
-
-
-
         List<String> nomes = artistasParaExcluir.stream()
                 .map(a -> a.getNome())
                 .collect(Collectors.toList());
@@ -194,7 +238,6 @@ public class TelaArtistasActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(item.getItemId() == R.id.itemLixoArtista){
-            obterArtistaListaExcluir();
 //              if(artistasParaExcluir.size() > 0){
                   ConfirmDialog.confirmDelete(this, this::confirmaExclusaoDeArtistasSelecionados);
 //              }
@@ -208,13 +251,15 @@ public class TelaArtistasActivity extends AppCompatActivity {
         startActivity(telaAddArtistaIntent);
     }
 
-    public void obterArtistaListaExcluir(){
-        if(acessoArtistaAdapter.listaCheckboxArtistas != null) {
-            if(acessoArtistaAdapter.listaCheckboxArtistas.size() > 0){
-                for (int i = 0; i < acessoArtistaAdapter.listaCheckboxArtistas.size(); i++) {
-                    artistasParaExcluir.add(acessoArtistaAdapter.listaCheckboxArtistas.get(i));
-                }
+    public void setAllCheckboxVisibility(boolean visibilidade){
+        if(visibilidade){
+            for (int i = 0; i < artistas.size(); i++) {
+                // colocar todos os checkbox visiveis
             }
         }
+        else{
+            // colocar todos os checkbox invisiveis
+        }
     }
+
 }

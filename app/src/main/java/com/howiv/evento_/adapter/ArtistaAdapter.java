@@ -19,13 +19,21 @@ import java.util.List;
 public class ArtistaAdapter extends RecyclerView.Adapter {
 
     List<Artista> artistas;
-    public static List<Artista> listaCheckboxArtistas =new ArrayList<Artista>();
+    //public static List<Artista> listaCheckboxArtistas =new ArrayList<Artista>();
     final private View.OnClickListener clickListener;
+    final private View.OnLongClickListener longClickListener;
+    final private View.OnClickListener checkboxClickListener;
 
 
-    public ArtistaAdapter(List<Artista> artistas, View.OnClickListener clickListener) {
+    public ArtistaAdapter(
+            List<Artista> artistas,
+            View.OnClickListener clickListener,
+            View.OnLongClickListener longClickListener,
+            View.OnClickListener checkboxClickListener) {
         this.artistas = artistas;
         this.clickListener = clickListener;
+        this.longClickListener = longClickListener;
+        this.checkboxClickListener = checkboxClickListener;
     }
 
     @NonNull
@@ -43,37 +51,10 @@ public class ArtistaAdapter extends RecyclerView.Adapter {
         vhClass.text_nome.setText(artista.getNome());
         vhClass.text_desc.setText(artista.getFuncoes());
         vhClass.checkBox_artista_selecionado.setChecked(false);
-
+        vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
         vhClass.layout_artista.setOnClickListener(clickListener);
-
-        vhClass.layout_artista.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(vhClass.checkBox_artista_selecionado.getVisibility() == View.INVISIBLE){
-                    vhClass.checkBox_artista_selecionado.setVisibility(View.VISIBLE);
-                    vhClass.checkBox_artista_selecionado.setChecked(true);
-                    listaCheckboxArtistas.add(artista);
-                }
-                else{
-                    vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
-                }
-                return false;
-            }
-        });
-
-        vhClass.checkBox_artista_selecionado.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isChecked =  vhClass.checkBox_artista_selecionado.isChecked();
-                if(isChecked){
-                    listaCheckboxArtistas.add(artista);
-                }else{
-                    if(listaCheckboxArtistas.size() > 0){
-                        listaCheckboxArtistas.remove(artista);
-                    }
-                }
-            }
-        });
+        vhClass.layout_artista.setOnLongClickListener(longClickListener);
+        vhClass.checkBox_artista_selecionado.setOnClickListener(checkboxClickListener);
     }
 
     @Override
