@@ -8,14 +8,14 @@
 
     <Button
         android:id="@+id/btn_salvar_banda"
-        android:layout_width="241dp"
+        android:layout_width="270dp"
         android:layout_height="58dp"
-        android:layout_marginBottom="36dp"
-        android:backgroundTint="@color/geral_sistema"
+        android:layout_marginBottom="40dp"
+        android:backgroundTint="@color/primary"
         android:text="@string/app_adicionar_bandas_btn_salvar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView

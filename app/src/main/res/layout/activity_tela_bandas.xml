@@ -12,7 +12,7 @@
         android:layout_marginBottom="40dp"
         android:onClick="abrirTelaAddBanda"
         android:text="@string/app_artistas_btn_Novo"
-        android:backgroundTint="@color/geral_sistema"
+        android:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
