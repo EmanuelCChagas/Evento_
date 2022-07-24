@@ -13,7 +13,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_novo_artistas"
-        style="@style/BtnAdd"
+        style="@style/BtnPrimary"
         android:onClick="abrirTelaAddArtista"
         android:text="@string/app_artistas_btn_Novo" />
 
