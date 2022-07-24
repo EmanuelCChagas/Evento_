@@ -6,10 +6,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">@integer/material_motion_duration_long_1</item>
         <item name="android:paddingTop">2dp</item>
-        <item name="layout_constraintBottom_toTopOf">@+id/btn_novo_artistas</item>
-        <item name="layout_constraintEnd_toEndOf">parent</item>
-        <item name="layout_constraintStart_toStartOf">parent</item>
-        <item name="layout_constraintTop_toTopOf">parent</item>
     </style>
 
     <style name="BtnPrimary">
@@ -21,9 +17,6 @@
         <item name="android:backgroundTint">@color/primary</item>
         <item name="android:textSize">16dp</item>
         <item name="cornerRadius">12dp</item>
-        <item name="layout_constraintBottom_toBottomOf">parent</item>
-        <item name="layout_constraintEnd_toEndOf">parent</item>
-        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 
     <style name="CardItem">
@@ -70,7 +63,6 @@
         <item name="android:textSize">13sp</item>
     </style>
 
-    <style name="CardItemSelectCheckbox">
-    </style>
+    <style name="CardItemSelectCheckbox"></style>
 
 </resources>
