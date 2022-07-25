@@ -48,7 +48,14 @@ public class BandaAdapter  extends RecyclerView.Adapter {
         BandaAdapter.ViewHolderClass vhClass = (BandaAdapter.ViewHolderClass)  holder;
         Banda banda = bandas.get(position);
         vhClass.text_nome.setText(banda.getNome());
-        vhClass.text_integrantes.setText(String.valueOf(banda.getIntegrantes().size()));
+        int quantidadeIntegrantesBanda = banda.getIntegrantes().size();
+
+        if(quantidadeIntegrantesBanda > 1){
+            vhClass.text_integrantes.setText(String.valueOf(quantidadeIntegrantesBanda + " integrantes"));
+        }
+        else{
+            vhClass.text_integrantes.setText(String.valueOf(quantidadeIntegrantesBanda + " integrante"));
+        }
         //vhClass.image_banda.setImage(Banda.getOperation());
 
         vhClass.checkBox_banda_selecionado.setChecked(false);
