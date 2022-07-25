@@ -98,13 +98,13 @@ public class TelaBandasActivity extends AppCompatActivity {
                         }
                     }
                     //editar bandas tela
-                    Banda bandaParaEditar = bandas.get(layoutCardBandaIndex);
-                    Intent i = new Intent(TelaBandasActivity.this, TelaAdicionarEditarBandasActivity.class);
-                    i.putExtra("EditarBanda", true);
-                    Gson gson = new Gson();
-                    String bandaEditarJson = gson.toJson(bandaParaEditar);
-                    i.putExtra("EditarBandaDados", bandaEditarJson);
-                    startActivity(i);
+                   // Banda bandaParaEditar = bandas.get(layoutCardBandaIndex);
+                   // Intent i = new Intent(TelaBandasActivity.this, TelaAdicionarEditarBandasActivity.class);
+                   // i.putExtra("EditarBanda", true);
+                   //Gson gson = new Gson();
+                   //String bandaEditarJson = gson.toJson(bandaParaEditar);
+                   //i.putExtra("EditarBandaDados", bandaEditarJson);
+                   //startActivity(i);
                 }
             }
         };
