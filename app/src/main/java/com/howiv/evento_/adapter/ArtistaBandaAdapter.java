@@ -19,9 +19,11 @@ package com.howiv.evento_.adapter;
 public class ArtistaBandaAdapter extends RecyclerView.Adapter {
 
     List<Artista> artistas;
+    final private View.OnClickListener checkboxClickListener;
 
-    public ArtistaBandaAdapter(List<Artista> artistas) {
+    public ArtistaBandaAdapter(List<Artista> artistas,  View.OnClickListener checkboxClickListener) {
         this.artistas = artistas;
+        this.checkboxClickListener = checkboxClickListener;
     }
 
     public List<Artista> getData(){
@@ -43,7 +45,8 @@ public class ArtistaBandaAdapter extends RecyclerView.Adapter {
         vhClass.text_nome.setText(artista.getNome());
         vhClass.text_desc.setText(artista.getFuncoes());
         vhClass.checkBox_artista_selecionado.setChecked(false);
-        vhClass.checkBox_artista_selecionado.setVisibility(View.INVISIBLE);
+        vhClass.checkBox_artista_selecionado.setVisibility(View.VISIBLE);
+        vhClass.checkBox_artista_selecionado.setOnClickListener(checkboxClickListener);
     }
 
     @Override

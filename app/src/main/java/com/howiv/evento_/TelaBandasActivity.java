@@ -98,13 +98,13 @@ public class TelaBandasActivity extends AppCompatActivity {
                         }
                     }
                     //editar bandas tela
-                   // Banda bandaParaEditar = bandas.get(layoutCardBandaIndex);
-                   // Intent i = new Intent(TelaBandasActivity.this, TelaAdicionarEditarBandasActivity.class);
-                   // i.putExtra("EditarBanda", true);
-                   //Gson gson = new Gson();
-                   //String bandaEditarJson = gson.toJson(bandaParaEditar);
-                   //i.putExtra("EditarBandaDados", bandaEditarJson);
-                   //startActivity(i);
+                    Banda bandaParaEditar = bandas.get(layoutCardBandaIndex);
+                    Intent i = new Intent(TelaBandasActivity.this, TelaAdicionarEditarBandasActivity.class);
+                    i.putExtra("EditarBanda", true);
+                   Gson gson = new Gson();
+                   String bandaEditarJson = gson.toJson(bandaParaEditar);
+                   i.putExtra("EditarBandaDados", bandaEditarJson);
+                   startActivity(i);
                 }
             }
         };
@@ -132,7 +132,7 @@ public class TelaBandasActivity extends AppCompatActivity {
                 CheckBox checkboxBanda = view.findViewById(R.id.checkBox_banda);
 
                 //obter index da Banda
-                ConstraintLayout layoutBanda = (ConstraintLayout) view.findViewById(R.id.idLayoutBanda);
+                ConstraintLayout layoutBanda = (ConstraintLayout) checkboxBanda.getParent();
                 MaterialCardView layoutCardBanda = (MaterialCardView) layoutBanda.getParent();
                 RecyclerView recViewParent = (RecyclerView) layoutCardBanda.getParent();
                 int layoutCardBandaIndex = recViewParent.getChildAdapterPosition(layoutCardBanda);
@@ -197,7 +197,7 @@ public class TelaBandasActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menuBanda = menu;
-        getMenuInflater().inflate(R.menu.menu_artista, menu);
+        getMenuInflater().inflate(R.menu.menu_banda, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -256,7 +256,7 @@ public class TelaBandasActivity extends AppCompatActivity {
                     // colocar todos os checkbox visiveis
                     bandaAdapter.notifyItemChanged(i);
                     if(menuBanda != null)
-                        menuBanda.findItem(R.id.itemLixoArtista).setVisible(true);
+                        menuBanda.findItem(R.id.itemLixoBanda).setVisible(true);
                 }
                 return true;
             } else {
@@ -265,7 +265,7 @@ public class TelaBandasActivity extends AppCompatActivity {
                     // colocar todos os checkbox visiveis
                     bandaAdapter.notifyItemChanged(i);
                     if(menuBanda != null)
-                        menuBanda.findItem(R.id.itemLixoArtista).setVisible(false);
+                        menuBanda.findItem(R.id.itemLixoBanda).setVisible(false);
                 }
                 return true;
             }
