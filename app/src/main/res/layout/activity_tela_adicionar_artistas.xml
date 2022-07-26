@@ -12,7 +12,7 @@
         android:layout_height="58dp"
         android:layout_marginBottom="36dp"
         android:text="@string/app_adicionar_artistas_btn_salvar"
-        android:backgroundTint="@color/geral_sistema"
+        android:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.447"
