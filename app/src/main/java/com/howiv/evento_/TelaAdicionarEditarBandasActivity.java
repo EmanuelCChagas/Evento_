@@ -140,10 +140,10 @@ public class TelaAdicionarEditarBandasActivity extends AppCompatActivity {
             EditText nomeView =  findViewById(R.id.input_nome_banda);
 
             String nome = nomeView.getText().toString();
-                if (nome.isEmpty() || artistasSelecionados.size() == 0) {
-                    Toast.makeText(this, "Há campos não preenchidos!", Toast.LENGTH_SHORT).show();
-                } else {
                     if(!editarBandaActivity) {
+                        if (nome.isEmpty() || artistasSelecionados.size() == 0) {
+                            Toast.makeText(this, "Há campos não preenchidos!", Toast.LENGTH_SHORT).show();
+                        } else {
                         Banda banda = new Banda(null, nome, artistasSelecionados);
                     databaseReferencia.child("Bandas").push().setValue(banda, new DatabaseReference.CompletionListener() {
                         @Override
@@ -158,25 +158,30 @@ public class TelaAdicionarEditarBandasActivity extends AppCompatActivity {
                         }
                     });
                     }
-                    else{
-                        Banda banda = new Banda(null, nome, artistasEdicaoBanda);
-                        Map<String, Object> bandaUpdate = new HashMap<>();
-                        bandaUpdate.put("/Bandas/" + bandaParaEditar.id,banda);
-                        databaseReferencia.updateChildren(bandaUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Toast.makeText(TelaAdicionarEditarBandasActivity.this,"Banda Salvo com Sucesso", Toast.LENGTH_LONG).show();
-                                        finish();
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(TelaAdicionarEditarBandasActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                                    }
-                                });
                     }
-                }
+                    else{
+                        if (nome.isEmpty() || artistasEdicaoBanda.size() == 0) {
+                        Toast.makeText(this, "Há campos não preenchidos!", Toast.LENGTH_SHORT).show();
+                    } else {
+                            Banda banda = new Banda(null, nome, artistasEdicaoBanda);
+                            Map<String, Object> bandaUpdate = new HashMap<>();
+                            bandaUpdate.put("/Bandas/" + bandaParaEditar.id, banda);
+                            databaseReferencia.updateChildren(bandaUpdate).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(TelaAdicionarEditarBandasActivity.this, "Banda Salvo com Sucesso", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(TelaAdicionarEditarBandasActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                        }
+                    }
+
         });
         databaseReferencia = FirebaseDatabase.getInstance().getReference();
         databaseReferencia.child("Bandas").addValueEventListener(new ValueEventListener() {
@@ -227,6 +232,8 @@ public class TelaAdicionarEditarBandasActivity extends AppCompatActivity {
                                              artistaAdapter = new ArtistaBandaAdapter(artistasSelecionados,checkboxClickListener);
                                              if(artistasSelecionados != null){
                                                 // btnAdicionarIntegrantes.setVisibility(View.GONE);
+                                                 if(menuBanda != null)
+                                                     menuBanda.findItem(R.id.itemLixoBanda).setVisible(true);
                                                  recyclerView.setVisibility(View.VISIBLE);
                                                  recyclerView.setAdapter(artistaAdapter);
                                              }
